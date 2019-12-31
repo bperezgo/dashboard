@@ -3,7 +3,7 @@ import dash_core_components as dcc
 
 
 def Header(app):
-    return html.Div([get_header(app), html.Br([]), get_menu()])
+    return html.Div([get_header(app), html.Br([])])
 
 
 def get_header(app):
@@ -12,7 +12,7 @@ def get_header(app):
             html.Div(
                 [
                     html.Img(
-                        src=app.get_asset_url("dash-financial-logo.png"),
+                        src=app.get_asset_url("agrodat.PNG"),
                         className="logo",
                     ),
                 ],
@@ -21,18 +21,8 @@ def get_header(app):
             html.Div(
                 [
                     html.Div(
-                        [html.H5("Calibre Financial Index Fund Investor Shares")],
+                        [html.H5("Agrodat: Una oportunidad para crecer tu finca")],
                         className="seven columns main-title",
-                    ),
-                    html.Div(
-                        [
-                            dcc.Link(
-                                "Full View",
-                                href="/dash-financial-report/full-view",
-                                className="full-view-link",
-                            )
-                        ],
-                        className="five columns",
                     ),
                 ],
                 className="twelve columns",
@@ -42,25 +32,6 @@ def get_header(app):
         className="row",
     )
     return header
-
-
-def get_menu():
-    menu = html.Div(
-        [
-            dcc.Link(
-                "Overview",
-                href="/dash-financial-report/overview",
-                className="tab first",
-            ),
-            dcc.Link(
-                "Price Performance",
-                href="/dash-financial-report/price-performance",
-                className="tab",
-            ),
-        ],
-        className="row all-tabs",
-    )
-    return menu
 
 
 def make_dash_table(df):

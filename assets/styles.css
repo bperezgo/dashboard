@@ -134,10 +134,10 @@ h6 {
   margin: 0;
 }
 h5 {
-  font-size: 2.6rem;
+  font-size: 3.9rem;
 }
 h6 {
-  font-size: 1.425rem;
+  font-size: 2.138rem;
 }
 
 .risk-reward {
@@ -157,7 +157,7 @@ li {
   padding: 30px;
   margin-bottom: 25px;
   border-radius: 1px;
-  background: #98151b;
+  background: #379815;
   color: #ffffff;
 }
 .full-view-link {
@@ -181,18 +181,18 @@ li {
   color: #3a3a3a;
   font-size: 40px !important;
   width: 80%;
-  border-left: 20px solid #98151b;
+  border-left: 20px solid #986b15;
   background: #ffffff;
   padding-left: 30px;
 }
 
 .subtitle {
   position: relative;
-  color: #3a3a3a;
+  color: #393939;
   left: 0;
   height: 20%;
   margin: 0mm;
-  border-left: 5px solid #98151b;
+  border-left: 5px solid #158c98;
   background: #ffffff;
   padding-top: 1px;
   padding-bottom: 1px;

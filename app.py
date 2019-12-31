@@ -5,7 +5,7 @@ import dash_html_components as html
 import plotly.graph_objs as go
 from dash.dependencies import Input, Output
 
-from utils import Header, make_dash_table, make_table_serie
+from utils import Header
 
 import pandas as pd
 import numpy as np
@@ -49,117 +49,6 @@ app.layout = html.Div(
             # page 1
             html.Div(
                 [
-                    # Row 3
-                    html.Div(
-                        [
-                            html.Div(
-                                [
-                                    html.H5("Product Summary"),
-                                    html.Br([]),
-                                    html.P(
-                                        "\
-                                    As the industry’s first index fund for individual investors, \
-                                    the Calibre Index Fund is a low-cost way to gain diversified exposure \
-                                    to the U.S. equity market. The fund offers exposure to 500 of the \
-                                    largest U.S. companies, which span many different industries and \
-                                    account for about three-fourths of the U.S. stock market’s value. \
-                                    The key risk for the fund is the volatility that comes with its full \
-                                    exposure to the stock market. Because the Calibre Index Fund is broadly \
-                                    diversified within the large-capitalization market, it may be \
-                                    considered a core equity holding in a portfolio.",
-                                        style={"color": "#ffffff"},
-                                        className="row",
-                                    ),
-                                ],
-                                className="product",
-                            )
-                        ],
-                        className="row",
-                    ),
-                    html.Div([
-                            html.H6("Código de la finca"),
-                            html.Br([]),
-                            dcc.Dropdown(
-                                id='codes',
-                                options=[{'label': i, 'value': i} for i in codes],
-                                value='512'
-                            ),
-                            html.Br([]),
-                            html.H6("Indicador a analizar"),
-                            html.Br([]),
-                            dcc.Dropdown(
-                                id='indicators',
-                                options=[{'label': i, 'value': i} for i in indicators],
-                                value='LITROS POR VACA'
-                            ),
-                            html.Br([]),
-                        ], style={'width': '90%', 'float': 'right', 'display': 'inline-block'}),
-                    # Row 4
-                    html.Div(
-                        [
-                            html.Div(
-                                [
-                                    html.H6(
-                                        ["Fund Facts"], className="subtitle padded"
-                                    ),
-                                    html.Table(make_table_serie(general_information, 2018, 512)),
-                                ],
-                                className="six columns",
-                            ),
-                            html.Div(
-                                [
-                                    html.H6(
-                                        "Average annual performance",
-                                        className="subtitle padded",
-                                    ),
-                                    dcc.Graph(
-                                        id='time-serie',
-                                        config={"displayModeBar": False},
-                                    ),
-                                ],
-                                className="six columns",
-                            ),
-                        ],
-                        className="row",
-                        style={"margin-bottom": "35px"},
-                    ),
-                    # Row 5
-                    html.Div(
-                        [
-                            html.Div(
-                                [
-                                    html.H6(
-                                        "Hypothetical growth of $10,000",
-                                        className="subtitle padded",
-                                    ),
-                                    dcc.Graph(
-                                        id="eq-point",
-                                        config={"displayModeBar": False},
-                                    ),
-                                ],
-                                className="six columns",
-                            ),
-                            html.Div(
-                                [
-                                    html.H6(
-                                        "Price & Performance (%)",
-                                        className="subtitle padded",
-                                    ),
-                                    html.Table(make_table_serie(general_cow_information, 2018, 512))
-                                ],
-                                className="six columns",
-                            ),
-                        ],
-                        className="row ",
-                    ),
-                    html.Div(dcc.Slider(
-                        id='dates-slider',
-                        min=general_cow_information.index.levels[0][0],
-                        max=general_cow_information.index.levels[0][-1],
-                        value=general_cow_information.index.levels[0][-1],
-                        marks={str(fecha): str(fecha) for fecha in general_cow_information.index.levels[0]},
-                        step=None
-                    ), style={'width': '90%', 'padding': '0px 20px 20px 20px'}),
                     html.Div(
                         [
                             html.Div(
@@ -185,7 +74,7 @@ app.layout = html.Div(
                             html.Div(
                                 [
                                     html.H6(
-                                        "Hypothetical growth of $10,000",
+                                        "Sensibilidad del punto de equilibrio",
                                         className="subtitle padded",
                                     ),
                                     html.Div(dcc.Graph(
@@ -203,25 +92,25 @@ app.layout = html.Div(
                             html.Tr([
                                 html.Td('Volumen de producción total'),
                                 html.Td(
-                                    dcc.Input(id="input-1", type="text", value="2000")
+                                    dcc.Input(id="input-1", type="text", value="789")
                                 )
                             ]),
                             html.Tr([
                                 html.Td('Número de hectáreas'),
                                 html.Td(
-                                    dcc.Input(id="input-2", type="text", value="40")
+                                    dcc.Input(id="input-2", type="text", value="20")
                                 )
                             ]),
                             html.Tr([
                                 html.Td('Vacas en ordeño'),
                                 html.Td(
-                                    dcc.Input(id="input-3", type="text", value="30")
+                                    dcc.Input(id="input-3", type="text", value="45")
                                 )
                             ]),
                             html.Tr([
                                 html.Td('Vacas Horras'),
                                 html.Td(
-                                    dcc.Input(id="input-4", type="text", value="5")
+                                    dcc.Input(id="input-4", type="text", value="7")
                                 )
                             ])
                         ])
@@ -233,7 +122,7 @@ app.layout = html.Div(
                             id='sens-slider-1',
                             min=800,
                             max=1500,
-                            value=1000,
+                            value=1230,
                             marks={
                                 800: {'label': '800 COP', 'style': {'color': '#77b0b1'}},
                                 1500: {'label': '1.500 COP', 'style': {'color': '#f50'}}
@@ -250,7 +139,7 @@ app.layout = html.Div(
                             id='sens-slider-2',
                             min=0,
                             max=40,
-                            value=10,
+                            value=2,
                             marks={
                                 0: {'label': '0', 'style': {'color': '#77b0b1'}},
                                 40: {'label': '40', 'style': {'color': '#f50'}}
@@ -260,16 +149,16 @@ app.layout = html.Div(
                         ), style={'width': '90%', 'padding': '0px 20px 20px 20px'}),
                         html.Div(id = 'sens-text-2')
                     ]),
-                    html.H6("Arrendamiento por fanegada"),
+                    html.H6("Arrendamiento por fanegada mensual"),
                     html.Br([]),
                     html.Div([
                         html.Div(dcc.Slider(
                             id='sens-slider-3',
-                            min=400000,
+                            min=100000,
                             max=1000000,
-                            value=400000,
+                            value=200000,
                             marks={
-                                400000: {'label': '400.000', 'style': {'color': '#77b0b1'}},
+                                100000: {'label': '100.000', 'style': {'color': '#77b0b1'}},
                                 1000000: {'label': '1.000.000', 'style': {'color': '#f50'}}
                             },
                             step=10000,
@@ -301,7 +190,7 @@ app.layout = html.Div(
                             id='sens-slider-5',
                             min=0,
                             max=1500,
-                            value=1000,
+                            value=1300,
                             marks={
                                 0: {'label': '0', 'style': {'color': '#77b0b1'}},
                                 1500: {'label': '1.500 COP', 'style': {'color': '#f50'}}
@@ -318,7 +207,7 @@ app.layout = html.Div(
                             id='sens-slider-6',
                             min=0,
                             max=2000,
-                            value=400,
+                            value=250,
                             marks={
                                 0: {'label': '0', 'style': {'color': '#77b0b1'}},
                                 2000: {'label': '2.000 COP', 'style': {'color': '#f50'}}
@@ -335,7 +224,7 @@ app.layout = html.Div(
                         id='sens-slider-7',
                         min=0,
                         max=1500,
-                        value=1000,
+                        value=1300,
                         marks={
                             0: {'label': '0', 'style': {'color': '#77b0b1'}},
                             1500: {'label': '1.500 COP', 'style': {'color': '#f50'}}
@@ -351,7 +240,7 @@ app.layout = html.Div(
                         id='sens-slider-8',
                         min=0,
                         max=2000,
-                        value=400,
+                        value=250,
                         marks={
                             0: {'label': '0', 'style': {'color': '#77b0b1'}},
                             2000: {'label': '2.000 COP', 'style': {'color': '#f50'}}
@@ -400,7 +289,7 @@ app.layout = html.Div(
                                 html.Td(html.Div(id = 'output-lit-lib'))
                             ]),
                             html.Tr([
-                                html.Td('Concentrado / leche'),
+                                html.Td('Leche / concentrado'),
                                 html.Td(html.Div(id = 'output-conc-leche'))
                             ]),
                         ])
@@ -413,67 +302,6 @@ app.layout = html.Div(
     )]
 )
 
-def create_time_series(dff, title):
-    #print(dff)
-    #print(dff.index)
-    #print(dff.values)
-    #print(title)
-    return {
-        "data": [
-            go.Scatter(
-                x=dff.index,
-                y=dff.values,
-                line={"color": "#97151c"},
-                mode="lines",
-                name="Calibre Index Fund Inv",
-            )
-        ],
-        "layout": go.Layout(
-            autosize=True,
-            title=title,
-            font={"family": "Raleway", "size": 10},
-            height=200,
-            width=340,
-            hovermode="closest",
-            legend={
-                "x": -0.0277108433735,
-                "y": -0.142606516291,
-                "orientation": "h",
-            },
-            margin={
-                "r": 20,
-                "t": 20,
-                "b": 20,
-                "l": 50,
-            },
-            showlegend=True,
-            xaxis={
-                "autorange": True,
-                "linecolor": "rgb(0, 0, 0)",
-                "linewidth": 1,
-                "range": [2008, 2018],
-                "showgrid": False,
-                "showline": True,
-                "title": "",
-                "type": "linear",
-            },
-            yaxis={
-                "autorange": True,
-                "gridcolor": "rgba(127, 127, 127, 0.2)",
-                "mirror": False,
-                "nticks": 4,
-                "showgrid": True,
-                "showline": True,
-                "ticklen": 10,
-                "ticks": "outside",
-                "title": "$",
-                "type": "linear",
-                "zeroline": False,
-                "zerolinewidth": 4,
-            },
-        ),
-    }
-
 def eq_point_serie(x, y, z,v, w, title):
     #print(dff)
     #print(dff.index)
@@ -484,7 +312,7 @@ def eq_point_serie(x, y, z,v, w, title):
             go.Scatter(
                 x=x,
                 y=y,
-                line={"color": "#97151c"},
+                line={"color": "#15961a"},
                 mode="lines",
                 name="Ingresos",
             ),
@@ -498,7 +326,7 @@ def eq_point_serie(x, y, z,v, w, title):
             go.Scatter(
                 x=v,
                 y=w,
-                line={"color": "#97151c"},
+                line={"color": "#153d96"},
                 mode="lines",
                 name="Volumen total",
             )
@@ -507,8 +335,8 @@ def eq_point_serie(x, y, z,v, w, title):
             autosize=True,
             title=title,
             font={"family": "Raleway", "size": 10},
-            height=240,
-            width=300,
+            height=480,
+            width=600,
             hovermode="closest",
             legend={
                 "x": -0.0277108433735,
@@ -548,38 +376,7 @@ def eq_point_serie(x, y, z,v, w, title):
             },
         ),
     }
-@app.callback(
-    dash.dependencies.Output('time-serie', 'figure'),
-    [dash.dependencies.Input('codes', 'value'),
-     dash.dependencies.Input('indicators', 'value')])
-def update_timeseries(code, indicator):
-    mask = (df_indicators['CODIGO'] == int(code))
-    dff = df_indicators[mask].groupby(['AÑO', 'MES']).mean().loc[2018][indicator]
-    title = '<b>{}</b><br>{}'.format(indicator, indicator)
-    try:
-        return create_time_series(dff, title)
-    except:
-        return None
 
-@app.callback(
-    dash.dependencies.Output('eq-point', 'figure'),
-    [dash.dependencies.Input('codes', 'value'),
-     dash.dependencies.Input('dates-slider', 'value')])
-def update_timeseries(code, date):
-    # date is in years
-    mask = (df_point_of_eq['CODIGO'] == int(code))
-    dff = df_point_of_eq[mask].groupby(['AÑO']).mean()[['PRECIO LECHE','COSTOS FIJOS','COSTOS VARIABLES','PUNTO DE EQUILIBRIO','VOLUMEN DIA']]
-    x = np.array(list(range(0, int(dff['VOLUMEN DIA'].loc[date]), 100)))
-    x = x*1.0
-    y = x * dff['PRECIO LECHE'].loc[date]
-    z = x * dff['COSTOS VARIABLES'].loc[date] + dff['COSTOS FIJOS'].loc[date]
-    v = np.array([dff['VOLUMEN DIA'].loc[date]]*2)
-    w = np.array([0.0, y[-1]])
-    title = '<b>{}</b><br>{}'.format(date, date)
-    try:
-        return eq_point_serie(x, y, z, v, w, title)
-    except:
-        return None
 
 @app.callback(
     [Output('eq-sens-point', 'figure'),
@@ -624,11 +421,11 @@ def update_timeseries(precio, trab, arrend, salario, prec_ene, masa_ene, prec_fi
     vacas = float(vacas_ord) + float(vacas_horr)
 
     utilidad = (precio - CV) * volumen - CF
-    conc_leche = (masa_ene + masa_fib) / volumen
-    lit_lib = (precio*volumen - prec_ene * masa_ene - prec_fib * masa_fib) / (precio * vacas)
+    conc_leche = volumen / (masa_ene + masa_fib)
+    lit_lib = (precio*volumen - prec_ene * masa_ene - prec_fib * masa_fib) / (precio * float(vacas_ord))
     lit_trab = volumen / trab
     lit_ha_a = volumen * 365 / float(HEC)
-    lit_vac = volumen / vacas
+    lit_vac = volumen / float(vacas_ord)
     punto_eq = CF / (precio - CV)
     costos_tot = CV * volumen + CF
     ingresos = precio * volumen
